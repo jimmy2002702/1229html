@@ -1,0 +1,134 @@
+ @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
+
+ /* 網路上的字體 */
+ :root {
+     /* 主藍色系 */
+     --color01: #7FB7D9;
+     /* 柔和天空藍，比原本更乾淨 */
+     --color02: #1F5A89;
+     /* 穩重深藍，適合主按鈕或標題 */
+     --color03: #DCE6EA;
+     /* 輕灰藍作為底色或邊框色 */
+     --color04: #2E3E4E;
+     --color05: #F29B9B;
+    /* 柔和粉紅紅，比原本更乾淨 */
+    --color06: #B3282D;
+    /* 穩重深紅，適合主按鈕或標題 */
+    --color07: #F4DDDD;
+    /* 淡紅灰作為底色或邊框色 */
+    --color08: #4A1C1C;
+    --color09:#da942b;
+ }
+
+ .sp-01 {
+      color:#1F5A89;
+ }
+.sp-02 {
+      color:var(--color06);
+ }
+ .bg-03 {
+     background-color:#F5F0E6;
+ }
+ .text-01{
+   color:#da942b;
+}
+ /* !產生網站代碼 */
+ /* crtl+z 復原 */
+ /*shift+alt+f 自動排版  */
+ /* 文字顏色 */
+ body {
+     font-family: "Zen Maru Gothic", sans-serif;
+     font-weight: 300;
+     font-style: normal;
+ }
+
+ /* 字體粗細 */
+ .fw-100 {
+     font-weight: 100;
+ }
+
+ .fw-200 {
+     font-weight: 200;
+ }
+
+ .fw-300 {
+     font-weight: 300;
+ }
+
+ .fw-400 {
+     font-weight: 400;
+ }
+
+ .fw-500 {
+     font-weight: 500;
+ }
+
+ .fw-600 {
+     font-weight: 600;
+ }
+
+ .fw-700 {
+     font-weight: 700;
+ }
+
+ .fw-800 {
+     font-weight: 800;
+ }
+
+ .fw-900 {
+     font-weight: 900;
+ }
+
+ .bg-cover {
+     background-position: center center;
+     background-size: cover;
+ }
+
+ /* (1)f12開發者模式  (2)點edit選手機款式 (3)show device frame套用手機款式瀏覽*/
+ 
+ /* roller 相關應用 */
+.roller-box-t {
+    position: relative;
+    overflow: hidden;
+}
+
+.roller-box-t .roller {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(29, 22, 231, 0.5);
+    transform: translateY(-100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roller-box-t:hover .roller {
+    transform: translateX(0);
+    transition: transform 1.5s;
+}
+
+.roller-box-b {
+    position: relative;
+    overflow: hidden;
+}
+
+.roller-box-b .roller {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(78, 16, 222, 0.5);
+    transform: translateY(100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roller-box-b:hover .roller {
+    transform: translateX(0);
+    transition: transform 1.5s;
+}
