@@ -1,0 +1,2594 @@
+<!DOCTYPE html>
+<html lang="ZH-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Supplies 寵物用品店</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link rel="stylesheet" href="css/my.css">
+
+  <style>
+    :root {
+      --pet-beige: #F5F0E6;
+      /* 柔和米色 */
+      --pet-cream: #EFE6D8;
+      /* 奶油色 */
+      --pet-brown: #5A4634;
+      /* 暖咖啡 */
+      --pet-orange: #E6A23C;
+      /* 奶茶橘 */
+    }
+
+    .s03carousel-item {
+      height: 80vh;
+      min-height: 400px;
+      position: relative;
+    }
+
+    .s03carousel-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+          rgba(90, 70, 52, 0.15),
+          rgba(90, 70, 52, 0.45));
+    }
+
+
+    .s03carousel-caption-box {
+      background: rgba(219, 180, 102, 0.92) !important;
+      backdrop-filter: blur(6px);
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(90, 70, 52, 0.25);
+      color: var(--pet-brown);
+    }
+
+
+    .s03carousel-badge {
+      color: var(--pet-brown);
+      background-color: var(--pet-cream);
+      border: 1px solid rgba(90, 70, 52, 0.2);
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 0.8rem;
+      letter-spacing: 0.15rem;
+    }
+
+    .s03carousel-caption-box .h1 {
+      color: #4A3728;
+    }
+
+    .carousel-caption-box p,
+    .carousel-list {
+      color: #6F5B4A !important;
+    }
+
+
+    .timeline-section {
+      position: relative;
+    }
+
+    .timeline-section-pointer::before {
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background-color: #fff;
+      left: 50%;
+      content: "";
+      transform: translateX(-50%);
+      bottom: 50%;
+      border: 4px solid #ccc;
+    }
+
+    .timeline-section02 {
+      position: relative;
+    }
+
+    .timeline-section02::before {
+      position: absolute;
+      width: 3px;
+      content: "";
+      top: 1px;
+      bottom: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--color01);
+    }
+
+    .timeline-section-pointer {
+      position: relative;
+    }
+
+    .timeline-section-pointer::before {
+      position: absolute;
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: var(--color02);
+      border-radius: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid var(--color01);
+      top: -10px;
+    }
+
+
+
+    .s07-userimg {
+      width: 120px;
+      height: 120px;
+      background-color: var(--color01);
+      background-image: url(image/cat06.avif);
+      border-radius: 10px;
+      transition: transform 0.6s, box-shadow 0.6s, border-radius 2s;
+    }
+
+    .s07-userimg:hover {
+      background-image: url(image/cat02.avif);
+      transform: scale(1.2);
+      box-shadow: 2px 2px 10px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+    }
+
+    .s10-text {
+      background-color: rgba(250, 246, 246, 0.921);
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 1px 1px 2px 1px #ccc;
+      margin: 10px auto;
+      width: fit-content;
+    }
+
+    .s12-text {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-radius: 30px;
+      box-shadow: 2px 2px 10px 2px #ccc;
+    }
+
+    .product-card {
+      background-color: #111;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.01);
+      transition: transform 0.3s, border 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .product-section-title {
+      letter-spacing: 0.2rem;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #f8f9fa;
+      aspect-ratio: 1;
+      margin-bottom: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.1);
+    }
+
+    /* 遮罩層 */
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .overlay {
+      transform: translateY(0);
+    }
+
+    /* 加入購物車按鈕 */
+    .add-to-cart {
+      background: #ffc107;
+      color: #000;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+
+    .add-to-cart:hover {
+      background: #ffb300;
+    }
+
+    /* 標籤樣式 */
+    .badge-new {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #dc3545;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 10;
+    }
+
+    .badge-sale {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #28a745;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 10;
+    }
+
+    /* 標題樣式 */
+    .product-section-title {
+      font-size: 2rem;
+      letter-spacing: 0.2rem;
+      margin-bottom: 0;
+    }
+
+    .fw-900 {
+      font-weight: 900;
+    }
+
+    /* 產品名稱懸停效果 */
+    .product-item:hover .product-name {
+      color: #ffc107 !important;
+    }
+
+    /* 輪播控制按鈕 */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 193, 7, 0.9);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .carousel:hover .carousel-control-prev,
+    .carousel:hover .carousel-control-next {
+      opacity: 1;
+    }
+
+    .carousel-control-prev {
+      left: -25px;
+    }
+
+    .carousel-control-next {
+      right: -25px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(1);
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .product-section-title {
+        font-size: 1.5rem;
+      }
+
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    :root {
+      --adoption-primary: #ff6b6b;
+      --adoption-secondary: #ffd93d;
+      --adoption-dark: #1a1a2e;
+    }
+
+    /* 背景漸層 */
+    .adoption-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .adoption-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: float 20s infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      50% {
+        transform: translate(-20px, 20px) rotate(180deg);
+      }
+    }
+
+    /* 標題區塊 */
+    .section-badge {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      display: inline-block;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+
+      0%,
+      100% {
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 4px 25px rgba(102, 126, 234, 0.8);
+      }
+    }
+
+    .adoption-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .view-more-link {
+      color: rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .view-more-link:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+
+    /* 認養卡片 */
+    .adoption-card {
+      position: relative;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      height: 100%;
+    }
+
+    .adoption-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .adoption-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .adoption-card:hover::before {
+      opacity: 1;
+    }
+
+    /* 圖片容器 */
+    .card-image-container {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .adoption-card img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .adoption-card:hover img {
+      transform: scale(1.15);
+    }
+
+    /* 狀態標籤 */
+    .adoption-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, var(--adoption-primary), #ff8787);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      z-index: 2;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .badge-urgent {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      animation: urgent-blink 1.5s infinite;
+    }
+
+    @keyframes urgent-blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+
+    .heart-button:hover {
+      background: var(--adoption-primary);
+      transform: scale(1.1);
+    }
+
+    .heart-button i {
+      color: #ccc;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .heart-button:hover i {
+      color: white;
+    }
+
+    .heart-button.active i {
+      color: var(--adoption-primary);
+      animation: heartbeat 0.6s ease;
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      25% {
+        transform: scale(1.3);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      75% {
+        transform: scale(1.2);
+      }
+    }
+
+    /* 卡片資訊 */
+    .card-info {
+      padding: 20px;
+      background: white;
+    }
+
+    .pet-name {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #333;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .adoption-card:hover .pet-name {
+      color: var(--adoption-primary);
+    }
+
+    .pet-name i {
+      color: var(--adoption-primary);
+      font-size: 1.2rem;
+    }
+
+    .pet-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .pet-info-tag {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .adoption-status {
+      color: var(--adoption-primary);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* 懸停時顯示的認養按鈕 */
+    .adopt-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      z-index: 2;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .adoption-card:hover .adopt-overlay {
+      transform: translateY(0);
+    }
+
+    .adopt-button {
+      background: linear-gradient(135deg, var(--adoption-secondary), #ffed4e);
+      color: #333;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 217, 61, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: 100%;
+    }
+
+    .adopt-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 217, 61, 0.6);
+      background: linear-gradient(135deg, #ffed4e, var(--adoption-secondary));
+    }
+
+    /* 個性標籤 */
+    .character-tags {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .character-tag {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* 輪播控制 */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .carousel:hover .carousel-control-prev,
+    .carousel:hover .carousel-control-next {
+      opacity: 1;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-control-prev {
+      left: -30px;
+    }
+
+    .carousel-control-next {
+      right: -30px;
+    }
+
+    /* 指示器 */
+    .carousel-indicators {
+      position: static;
+      margin-top: 30px;
+      margin-bottom: 0;
+    }
+
+    .carousel-indicators button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-indicators button.active {
+      width: 30px;
+      border-radius: 10px;
+      background: white;
+    }
+
+    @media screen and (max-width: 768px) {
+
+      .timeline-section::before,
+      .timeline-section02::before,
+      .timeline-section-pointer::before {
+        display: none;
+      }
+
+      .s06-text {
+        z-index: 100;
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 1px 1px 2px 1px #ccc;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .s06-text p {
+        color: white;
+
+        .carousel-control-prev,
+        .carousel-control-next {
+          width: 40px;
+          height: 40px;
+        }
+
+        .carousel-control-prev {
+          left: -10px;
+        }
+
+        .carousel-control-next {
+          right: -10px;
+        }
+      }
+    }
+  </style>
+</head>
+
+
+  <!-- s01 -->
+  <section id="s01" class="bg-secondary">
+    <div class="container py-2">
+      <div class="text-end">
+        <a href="#">
+          <i class="fa-brands fa-square-instagram fa-2x"></i>
+        </a>
+        <i class="fa-brands fa-square-x-twitter fa-2x"></i>
+        <i class="fa-brands fa-line fa-2x"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- s02 Navbar -->
+  <section id="s02">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fa-solid fa-paw text-warning fa-3x"></i>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"><i
+                  class="fa-solid fa-house me-1 text-info"></i>首頁</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#s04"><i class="fa-solid fa-address-card me-1"></i>關於我們</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#s05"><i class="fa-solid fa-address-card me-1"></i>品牌理念</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="fa-brands fa-servicestack me-1"></i>服務項目
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">寵物美容</a></li>
+                <li><a class="dropdown-item" href="#">寵物購買</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">寵物認養</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div>
+            <div class="d-flex">
+              <span class="text-01 h3 me-2 d-none" id="s02-member-span">會員: <span
+                  class="text-03 fw-900 h2">xxx</span></span>
+              <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#loginModal"
+                id="s02-login-btn"><i class="fa-solid fa-user"></i>登入</button>
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal"
+                id="s02-register-btn"><i class="fa-solid fa-registered"></i>註冊</button>
+              <button class="btn btn-danger d-none me-2" id="s02-logout-btn"><i
+                  class="fa-solid fa-right-from-bracket"></i>登出</button>
+              <button class="btn btn-primary d-none" id="s02-control-panel-btn"><i
+                  class="fa-solid fa-solar-panel"></i>控制台</button>
+            </div>
+          </div>
+        </div>
+    </nav>
+  </section>
+
+  <!-- loginModal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-bg-warning">
+          <h1 class="modal-title fs-5 fw-900" id="exampleModalLabel">會員登入</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="" class="form-label">帳號</label>
+            <input type="text" class="form-control" id="l-username" placeholder="帳號1-8字">
+            <div class="valid-feedback" id="r-username-valid-feedback">帳號符合規定</div>
+            <div class="invalid-feedback" id="r-username-invalid-feedback">帳號不符合規定</div>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label">密碼</label>
+            <input type="password" class="form-control" id="l-password" placeholder="密碼1-8字">
+            <div class="valid-feedback">密碼符合規定</div>
+            <div class="invalid-feedback">密碼不符合規定</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="me-auto" data-bs-toggle="modal" data-bs-target="#registerModal">還沒有帳號</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" id="l-btn-ok">確認</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- registerModal -->
+  <div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header text-bg-warning">
+          <h1 class="modal-title fs-5 fw-900">會員註冊</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="row timeline-section">
+
+            <div class="col-6">
+              <div class="h3 fw-900">店鋪政策</div>
+              <p>
+                為保障商品品質與消費者權益，本店採嚴格檢驗與分級管理，並提供透明的退換貨與保固說明。
+                我們致力挑選安全、有效且有品牌保證的寵物用品，讓每一位毛孩和飼主都能放心購買與使用。
+              </p>
+              <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input">
+                <label class="form-check-label">我已閱讀並同意店鋪政策</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="" class="form-label">帳號</label>
+                <input type="text" class="form-control is-invalid" id="r-username" placeholder="帳號1-8字">
+                <div class="valid-feedback">帳號符合規定</div>
+                <div class="invalid-feedback">帳號不符合規定</div>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">密碼</label>
+                <input type="password" class="form-control is-invalid" id="r-password" placeholder="密碼1-8字">
+                <div class="valid-feedback">密碼符合規定</div>
+                <div class="invalid-feedback">密碼不符合規定</div>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">確認密碼</label>
+                <input type="password" class="form-control is-invalid" id="r-retype-password" placeholder="重新確認密碼">
+                <div class="valid-feedback">密碼一致</div>
+                <div class="invalid-feedback">密碼不一致</div>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Email</label>
+                <input type="email" class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <a href="#" class="me-auto" data-bs-toggle="modal" data-bs-target="#loginModal">已有帳號 ></a>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button class="btn btn-primary" id="r-btn-ok">確認</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- s03 輪播 Banner -->
+  <section id="s03">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+      </div>
+
+      <div class="carousel-inner">
+
+        <!-- 1 -->
+        <div class="carousel-item active bg-cover " style="background-image:url(image/dog.avif); height: 100vh;">
+          <div
+            class="carousel-caption d-none d-md-block carousel-caption-box bg-dark bg-opacity-50 p-4 rounded-3 shadow-lg">
+            <div class="carousel-badge">
+              <i class="fa-solid fa-box-open me-3"></i>精選好物
+            </div>
+            <div class="h1 fw-900 my-3">寵物用品 · 精選好物上架</div>
+            <p class="mb-3 text-white-50 fw-bold">
+              從飼料、玩具到清潔保健，我們替你挑選最值得信賴的品牌與商品。
+              快速配送、安心退換，讓你一次購足所有毛孩需要的日常用品。
+            </p>
+            <div class="carousel-list text-white-50 mb-3">
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>嚴選品牌 × 原廠授權</div>
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>快速出貨 × 7-14 天配送（依所在地）
+              </div>
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>安全成分 × 敏感毛孩也適用</div>
+            </div>
+            <div>
+              <button class="btn btn-warning"><i class="fa-solid fa-cart-plus"></i> 立即購買</button>
+              <button class="btn btn-outline-light"><i class="fa-solid fa-cloud-arrow-down"></i> 下載商品目錄</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="carousel-item bg-cover" style="background-image:url(image/cat02.avif); height: 100vh;">
+          <div
+            class="carousel-caption d-none d-md-block carousel-caption-box bg-dark bg-opacity-50 p-4 rounded-3 shadow-lg">
+            <div class="carousel-badge">
+              <i class="fa-solid fa-bone me-3"></i>熱門商品
+            </div>
+            <div class="h1 fw-900 my-3">熱銷推薦 · 毛孩最愛清單</div>
+            <p class="mb-3 text-white-50 fw-bold">
+              精選各類熱銷商品與新品上架，從零食到訓練用品，讓你一指下單，送貨到家。
+            </p>
+            <div class="carousel-list text-white-50 mb-3">
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>零食 × 天然無添加</div>
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>玩具 × 耐咬設計</div>
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>保健 × 專業配方</div>
+            </div>
+            <div>
+              <button class="btn btn-warning"><i class="fa-solid fa-cart-plus"></i> 加入購物車</button>
+              <button class="btn btn-outline-light"><i class="fa-solid fa-cloud-arrow-down"></i> 下載商品清單</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="carousel-item bg-cover" style="background-image:url(image/dog2.avif); height: 100vh;">
+          <div
+            class="carousel-caption d-none d-md-block carousel-caption-box bg-dark bg-opacity-50 p-4 rounded-3 shadow-lg">
+            <div class="carousel-badge">
+              <i class="fa-solid fa-shield-halved me-3"></i>保健照護
+            </div>
+            <div class="h1 fw-900 my-3">保健用品 · 守護毛孩健康</div>
+            <p class="mb-3 text-white-50 fw-bold">
+              從營養補充到皮膚保養，我們提供專業等級的保健商品，並標示成分與使用建議，陪伴毛孩一生健康。
+            </p>
+            <div class="carousel-list text-white-50 mb-3">
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>營養補充 × 專業配方</div>
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>清潔用品 × 溫和無刺激</div>
+              <div class="mb-1"><i class="fa-solid fa-circle-check text-warning me-2 fw-bold"></i>合作獸醫 × 使用建議</div>
+            </div>
+            <div>
+              <button class="btn btn-warning"><i class="fa-solid fa-cart-plus"></i> 購買保健品</button>
+              <button class="btn btn-outline-light"><i class="fa-solid fa-cloud-arrow-down"></i> 下載保健指南</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
+    </div>
+  </section>
+
+
+  <!-- s04 品牌簡介 -->
+  <section id="s04">
+    <div class="row align-items-center">
+      <div class="col-md-5 bg-cover d-none d-md-block wow animate__flipInX" data-wow-duration="2s" data-wow-delay="0s"
+        data-wow-iteration="1" style="background-image:url(image/cat04.avif); height: 600px;">
+      </div>
+
+      <div class="col-md-7 p-5">
+        <div class="h1">自 2000 年起，<span class="text-success fw-900 wow animate__fadeInDown" data-wow-duration="6s"
+            data-wow-delay="0s" data-wow-iteration="1">最專業的寵物用品零售品牌</span></div>
+        <p class="h1">陪伴毛孩的每一天，從良好的用品開始。</p>
+        <p class="mb-3 fw-300 fw-bold">我們嚴選國際與本土優質品牌，從飼料到保養品，皆有明確成分與來源說明。</p>
+        <p class="mb-3 fw-bold">客服與商品物流快速穩定，讓購物流程更安心順暢。</p>
+        <p class="mb-3 fw-bold">提供會員專屬折扣與定期優惠活動，回饋長期支持的飼主們。</p>
+
+        <div class="row mt-5">
+          <div class="col-md-3">
+            <div class="h4">年均出貨訂單</div>
+            <div class="display-2 fw-900 text-primary counter01">18<span class="h4">K+</span></div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="h4">商品 SKU 數</div>
+            <div class="display-2 fw-900 text-danger counter02">2<span class="h4">K+</span></div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="h4">營業年數</div>
+            <div class="display-2 fw-900 text-dark counter03">25<span class="h4">年</span></div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="h4">服務據點</div>
+            <div class="display-2 fw-900 text-info counter04">5<span class="h4">間</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- s12 -->
+  <section id="s12">
+    <div style="background-image: url(image/dog3.avif);" class="bg-cover mb-3">
+      <div class="container">
+        <div class="row">
+
+          <!-- 左邊：流程介紹大段 -->
+          <div class="col-md-6 d-flex align-items-center">
+            <div class="s12-text mt-5">
+              <div class="h2 text-center fw-bold">寵物美容流程</div>
+              <p>
+                我們相信美容不是外表打理，更是一次身心放鬆的體驗。
+                因此在每位毛孩進入美容流程前，美容師會首先了解牠的
+                性格、健康、過往美容經驗，並透過安撫方式建立第一步
+                信任感。
+              </p>
+              <p>
+                美容過程中保持「低壓力、漸進式、安全至上」原則，
+                從洗浴、吹乾到造型打造，每一步都依毛孩狀態微調節奏，
+                讓牠感覺安心、不害怕，甚至愉快享受。
+              </p>
+            </div>
+          </div>
+
+          <!-- 右側：流程排版 -->
+          <div class="col-md-5 timeline-section02">
+
+            <!-- Step 1 -->
+            <div class="row my-3 timeline-section-pointer">
+              <div class="col-md-6">
+                <div class="bg-cover"
+                  style="background-image: url(image/rat.avif); height: 180px; border-radius: 20px;">
+                </div>
+              </div>
+              <div class="col-md-6 s12-text my-2">
+                <div class="h4 fw-bold">一、到店前溝通與評估</div>
+                <p>
+                  美容前會詢問毛孩的個性、健康與過往經驗，
+                  預先掌握情緒與適應力，減少陌生感帶來的壓力。
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="row flex-row-reverse my-3 timeline-section-pointer">
+              <div class="col-md-6">
+                <div class="bg-cover"
+                  style="background-image: url(image/rabbit.avif); height: 180px; border-radius: 20px;">
+                </div>
+              </div>
+              <div class="col-md-6 s12-text my-2">
+                <div class="h4 fw-bold">二、皮毛狀況檢查</div>
+                <p>
+                  美容師逐項檢視皮膚與毛況，
+                  判斷是否乾癢、毛結、過敏或皮屑等，
+                  為後續挑選最適合的洗護產品。
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="row my-3 timeline-section-pointer">
+              <div class="col-md-6">
+                <div class="bg-cover"
+                  style="background-image: url(image/pet2.avif); height: 180px; border-radius: 20px;">
+                </div>
+              </div>
+              <div class="col-md-6 s12-text my-2">
+                <div class="h4 fw-bold">三、洗浴舒壓與柔風吹乾</div>
+                <p>
+                  使用友善皮膚、低刺激性洗護，
+                  洗浴搭配安撫動作降低緊繃感；
+                  吹毛採低風量且分區吹整，
+                  減少溫度集中帶來的不適。
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="row flex-row-reverse my-3 timeline-section-pointer">
+              <div class="col-md-6">
+                <div class="bg-cover"
+                  style="background-image: url(image/cat04.avif); height: 180px; border-radius: 20px;">
+                </div>
+              </div>
+              <div class="col-md-6 s12-text my-2">
+                <div class="h4 fw-bold">四、造型修剪與回饋說明</div>
+                <p>
+                  根據毛孩臉型、毛量與體態客製化修剪，
+                  完成後會提供回家保養建議與情緒狀況回報，
+                  讓主人了解毛孩整體狀況與維持方式。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- row 或流程 wrapper 結束 -->
+      </div>
+    </div> <!-- container 結束 -->
+  </section>
+
+
+
+
+
+
+  <!-- s05 企業精神 -->
+  <section id="s05" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-4 text-center">
+          <i class="fa-solid fa-heart fa-8x text-01 mt-3 sp-02"></i>
+          <div class="h1 fw-900 text-success mt-3">以愛為核心</div>
+          <p class="mt-3 text-muted d-none d-md-block fw-bold">
+            每隻毛孩都是家人，我們以溫柔、安全的方式提供最貼心的照護，讓寶貝開心、飼主安心。
+          </p>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <i class="fa-solid fa-certificate fa-8x text-02 mt-3 sp-03"></i>
+          <div class="h1 fw-900 text-primary mt-3">專業照護</div>
+          <p class="mt-3 text-muted d-none d-md-block fw-bold">
+            全體美容師皆具備專業證照與多年經驗，確保從洗浴、護毛到造型剪都能讓毛孩保持最佳狀態。
+          </p>
+        </div>
+
+        <div class="col-md-4 text-center">
+          <i class="fa-solid fa-shield-dog fa-8x text-03 mt-3 sp-01"></i>
+          <div class="h1 fw-900 text-dark mt-3">安心環境</div>
+          <p class="mt-3 text-muted d-none d-md-block fw-bold">
+            採用低噪音設備、友善空間設計及全店每日消毒，打造讓毛孩放鬆、無壓力的美容環境。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- s06 品牌理念 -->
+  <section id="s06" style="position: relative;">
+    <div class="row">
+      <div class="col-md-5 bg-cover"
+        style="position: absolute; top: 0; bottom: 0; background-image: url(image/cat03.avif);"></div>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-md-7 s06-text">
+          <div class="h2 fw-900 text-center my-3 text-01">專業 · 溫柔 · 讓毛孩真正放鬆</div>
+          <p class="fw-bold">
+            我們深信毛孩的美容不只是外表的整理，更是身心靈的放鬆。
+            因此從流程、設備到用品選擇，都以「安全、舒適、零壓力」為核心，
+            讓毛孩在安心的環境中享受服務。
+          </p>
+          <button class="btn btn-warning">查看更多</button>
+
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="h4 fw-900 text-center my-3 text-03">誠信與責任</div>
+              <p class="fw-bold">
+                所有服務過程透明公開，並依毛孩狀態調整美容節奏，
+                我們用心守護每一位毛孩，並珍惜飼主的每一分信任。
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <div class="h4 fw-900 text-center my-3 text-03">專業與熱情</div>
+              <p class="fw-bold">
+                我們持續進修國際美容技術，
+                以熱情與耐心面對每一位毛孩，
+                透過細節讓毛孩更舒適、更漂亮、更健康。
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s07 美容師介紹 -->
+  <div class="section" id="s07">
+    <div class="container">
+      <div class="display-4 fw-900 text-03 text-center my-4">
+        專業寵物美容師介紹
+      </div>
+
+      <div class="row g-4">
+
+        <!-- 美容師 1 -->
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <div class="s07-userimg bg-cover col-4 me-3"></div>
+            <div>
+              <div class="h1 text-danger fw-900 my-3 text-center">美容師：Miko</div>
+              <p class="fw-bold">擅長幼犬美容、敏感肌 SPA、安撫式洗護，以溫柔細心著稱，是許多狗狗的最愛。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 美容師 2 -->
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <div class="s07-userimg bg-cover col-4 me-3"></div>
+            <div>
+              <div class="h1 text-danger fw-900 my-3 text-center">美容師：Luna</div>
+              <p class="fw-bold">擅長貓咪美容、無壓力護毛、靜態 SPA，特別了解貓咪情緒，是貓主人一致推薦的專家。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 美容師 3 -->
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <div class="s07-userimg bg-cover col-4 me-3"></div>
+            <div>
+              <div class="h1 text-danger fw-900 my-3 text-center">美容師：Kenny</div>
+              <p class="fw-bold">擅長造型剪、毛量重整、犬種專屬造型，擁有多項國際美容獎項。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 美容師 4 -->
+        <div class="col-md-6">
+          <div class="d-flex align-items-center">
+            <div class="s07-userimg bg-cover col-4 me-3"></div>
+            <div>
+              <div class="h1 text-danger fw-900 my-3 text-center">美容師：Amber</div>
+              <p class="fw-bold">專攻 SPA 皮膚護理與高齡犬照護，能細心處理敏感肌與脆弱毛質問題。</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- s08 服務方案 -->
+  <section id="s08" style="position: relative;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 py-5">
+
+          <dl class="row">
+
+            <!-- 方案 1 -->
+            <dt class="col-sm-3">基礎洗護</dt>
+            <dd class="col-sm-9">
+              <p class="fw-bold">適合短毛、中小型犬貓。</p>
+              <p class="fw-bold">包含洗澡、護毛、耳朵清潔、吹整。</p>
+              <p class="fw-900 text-primary">NT$ 800 起</p>
+            </dd>
+
+            <!-- 方案 2 -->
+            <dt class="col-sm-3">SPA 舒壓課程</dt>
+            <dd class="col-sm-9">
+              <p class="fw-bold">最受歡迎！適合敏感肌或緊張型毛孩。</p>
+              <p class="fw-bold">包含深層SPA、護毛、肉球護理、臉部整理。</p>
+              <p class="fw-900 text-success">NT$ 1,500 起</p>
+            </dd>
+
+            <!-- 方案 3 -->
+            <dt class="col-sm-3">造型美容</dt>
+            <dd class="col-sm-9">
+              <p class="fw-bold">適合需全身造型的毛孩，如泰迪、博美、貴賓等。</p>
+              <p class="fw-bold">提供造型剪、護毛 SPA、專業吹整與美容照。</p>
+              <p class="fw-900 text-danger">NT$ 2,500 起</p>
+            </dd>
+
+            <!-- 方案 4 -->
+            <dt class="col-sm-3">客製照護</dt>
+            <dd class="col-sm-9">
+              <p class="fw-bold">針對高齡犬、特殊皮膚、敏感毛質等制定個人化方案。</p>
+              <p class="fw-bold">可加購精油 SPA、牙口護理、關節舒緩等。</p>
+              <p class="fw-900 text-warning">依需求報價</p>
+            </dd>
+
+            <!-- 加購項目 -->
+            <dt class="col-sm-3">熱門加購</dt>
+            <dd class="col-sm-9">
+              <dl class="row">
+                <dt class="col-sm-4">可選加項</dt>
+                <dd class="col-sm-8">
+                  <ul>
+                    <li class="fw-bold">精油 SPA</li>
+                    <li class="fw-bold">特色造型剪</li>
+                    <li class="fw-bold">牙口清潔</li>
+                    <li class="fw-bold">肉球深層護理</li>
+                  </ul>
+                </dd>
+              </dl>
+            </dd>
+
+          </dl>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-md-5 bg-cover"
+        style="position: absolute; top: 0; bottom: 0; background-image: url(image/cat02.avif);"></div>
+    </div>
+  </section>
+
+
+
+
+  <!-- s15 待認養動物專區 -->
+  <section class="adoption-section">
+    <div class="container py-5 position-relative">
+      <div class="d-flex justify-content-between align-items-end mb-5">
+        <div>
+          <span class="section-badge">
+            <i class="fa-solid fa-heart-pulse me-2"></i>ADOPTION CENTER
+          </span>
+          <h2 class="adoption-title mb-0">待認養動物專區</h2>
+        </div>
+        <a href="#" class="text-decoration-none view-more-link d-flex align-items-center gap-2">
+          查看更多待認養動物<i class="fa-solid fa-arrow-right-long"></i>
+        </a>
+      </div>
+
+      <div id="adoptionCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <!-- 第一頁 -->
+          <div class="carousel-item active">
+            <div class="row g-4">
+              <div class="col-6 col-md-3">
+                <div class="adoption-card">
+                  <span class="adoption-badge">
+                    <i class="fa-solid fa-star me-1"></i>熱門
+                  </span>
+                  <div class="heart-button">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1633722715463-d30f4f325e24?w=500" alt="黃金獵犬"
+                      loading="lazy">
+                  </div>
+                  <div class="adopt-overlay">
+                    <button class="adopt-button">
+                      <i class="fa-solid fa-heart me-2"></i>立即認養
+                    </button>
+                  </div>
+                  <div class="card-info">
+                    <div class="pet-name">
+                      <i class="fa-solid fa-paw"></i>
+                      小花
+                    </div>
+                    <div class="character-tags">
+                      <span class="character-tag">親人</span>
+                      <span class="character-tag">活潑</span>
+                    </div>
+                    <div class="pet-details">
+                      <span class="pet-info-tag">
+                        <i class="fa-solid fa-venus"></i>
+                        2歲・母
+                      </span>
+                      <span class="adoption-status">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        免費認養
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="adoption-card">
+                  <span class="adoption-badge badge-urgent">
+                    <i class="fa-solid fa-clock me-1"></i>急尋
+                  </span>
+                  <div class="heart-button">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1568572933382-74d440642117?w=500" alt="德牧"
+                      loading="lazy">
+                  </div>
+                  <div class="adopt-overlay">
+                    <button class="adopt-button">
+                      <i class="fa-solid fa-heart me-2"></i>立即認養
+                    </button>
+                  </div>
+                  <div class="card-info">
+                    <div class="pet-name">
+                      <i class="fa-solid fa-paw"></i>
+                      巧克力
+                    </div>
+                    <div class="character-tags">
+                      <span class="character-tag">忠誠</span>
+                      <span class="character-tag">聰明</span>
+                    </div>
+                    <div class="pet-details">
+                      <span class="pet-info-tag">
+                        <i class="fa-solid fa-mars"></i>
+                        3歲・公
+                      </span>
+                      <span class="adoption-status">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        免費認養
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="adoption-card">
+                  <span class="adoption-badge">
+                    <i class="fa-solid fa-star me-1"></i>推薦
+                  </span>
+                  <div class="heart-button">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=500" alt="虎斑貓"
+                      loading="lazy">
+                  </div>
+                  <div class="adopt-overlay">
+                    <button class="adopt-button">
+                      <i class="fa-solid fa-heart me-2"></i>立即認養
+                    </button>
+                  </div>
+                  <div class="card-info">
+                    <div class="pet-name">
+                      <i class="fa-solid fa-paw"></i>
+                      小虎
+                    </div>
+                    <div class="character-tags">
+                      <span class="character-tag">溫馴</span>
+                      <span class="character-tag">可愛</span>
+                    </div>
+                    <div class="pet-details">
+                      <span class="pet-info-tag">
+                        <i class="fa-solid fa-venus"></i>
+                        1歲・母
+                      </span>
+                      <span class="adoption-status">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        免費認養
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="adoption-card">
+                  <span class="adoption-badge">
+                    <i class="fa-solid fa-sparkles me-1"></i>新成員
+                  </span>
+                  <div class="heart-button">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="image/cat05.avif" />" alt="橘貓" loading="lazy">
+                  </div>
+                  <div class="adopt-overlay">
+                    <button class="adopt-button">
+                      <i class="fa-solid fa-heart me-2"></i>立即認養
+                    </button>
+                  </div>
+                  <div class="card-info">
+                    <div class="pet-name">
+                      <i class="fa-solid fa-paw"></i>
+                      花花
+                    </div>
+                    <div class="character-tags">
+                      <span class="character-tag">親人</span>
+                      <span class="character-tag">貪吃</span>
+                    </div>
+                    <div class="pet-details">
+                      <span class="pet-info-tag">
+                        <i class="fa-solid fa-venus"></i>
+                        6個月・母
+                      </span>
+                      <span class="adoption-status">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        免費認養
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 第二頁 -->
+          <div class="carousel-item">
+            <div class="row g-4">
+              <div class="col-6 col-md-3">
+                <div class="adoption-card">
+                  <span class="adoption-badge badge-urgent">
+                    <i class="fa-solid fa-clock me-1"></i>急尋
+                  </span>
+                  <div class="heart-button">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=500" alt="拉布拉多"
+                      loading="lazy">
+                  </div>
+                  <div class="adopt-overlay">
+                    <button class="adopt-button">
+                      <i class="fa-solid fa-heart me-2"></i>立即認養
+                    </button>
+                  </div>
+                  <div class="card-info">
+                    <div class="pet-name">
+                      <i class="fa-solid fa-paw"></i>
+                      旺財
+                    </div>
+                    <div class="character-tags">
+                      <span class="character-tag">溫和</span>
+                      <span class="character-tag">忠誠</span>
+                    </div>
+                    <div class="pet-details">
+                      <span class="pet-info-tag">
+                        <i class="fa-solid fa-mars"></i>
+                        4歲・公
+                      </span>
+                      <span class="adoption-status">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        免費認養
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="adoption-card">
+                  <span class="adoption-badge">
+                    <i class="fa-solid fa-fire me-1"></i>人氣
+                  </span>
+                  <div class="heart-button">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?w=500" alt="三花貓"
+                      loading="lazy">
+                  </div>
+                  <div class="adopt-overlay">
+                    <button class="adopt-button">
+                      <i class="fa-solid fa-heart me-2"></i>立即認養
+                    </button>
+                  </div>
+                  <div class="card-info">
+                    <div class="pet-name">
+                      <i class="fa-solid fa-paw"></i>
+                      咪咪
+                    </div>
+                    <div class="character-tags">
+                      <span class="character-tag">獨立</span>
+                      <span class="character-tag">優雅</span>
+                    </div>
+                    <div class="pet-details">
+                      <span class="pet-info-tag">
+                        <i class="fa-solid fa-venus"></i>
+                        2歲・母
+                      </span>
+                      <span class="adoption-status">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        免費認養
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="adoption-card">
+                  <span class="adoption-badge">
+                    <i class="fa-solid fa-star me-1"></i>推薦
+                  </span>
+                  <div class="heart-button">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=500" alt="柴犬"
+                      loading="lazy">
+                  </div>
+                  <div class="adopt-overlay">
+                    <button class="adopt-button">
+                      <i class="fa-solid fa-heart me-2"></i>立即認養
+                    </button>
+                  </div>
+                  <div class="card-info">
+                    <div class="pet-name">
+                      <i class="fa-solid fa-paw"></i>
+                      豆豆
+                    </div>
+                    <div class="character-tags">
+                      <span class="character-tag">活潑</span>
+                      <span class="character-tag">聰明</span>
+                    </div>
+                    <div class="pet-details">
+                      <span class="pet-info-tag">
+                        <i class="fa-solid fa-mars"></i>
+                        1歲・公
+                      </span>
+                      <span class="adoption-status">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        免費認養
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <div class="adoption-card">
+                  <span class="adoption-badge badge-urgent">
+                    <i class="fa-solid fa-clock me-1"></i>急尋
+                  </span>
+                  <div class="heart-button">
+                    <i class="fa-solid fa-heart"></i>
+                  </div>
+                  <div class="card-image-container">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500" alt="白貓"
+                      loading="lazy">
+                  </div>
+                  <div class="adopt-overlay">
+                    <button class="adopt-button">
+                      <i class="fa-solid fa-heart me-2"></i>立即認養
+                    </button>
+                  </div>
+                  <div class="card-info">
+                    <div class="pet-name">
+                      <i class="fa-solid fa-paw"></i>
+                      雪球
+                    </div>
+                    <div class="character-tags">
+                      <span class="character-tag">安靜</span>
+                      <span class="character-tag">黏人</span>
+                    </div>
+                    <div class="pet-details">
+                      <span class="pet-info-tag">
+                        <i class="fa-solid fa-venus"></i>
+                        3歲・母
+                      </span>
+                      <span class="adoption-status">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        免費認養
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 控制按鈕 -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#adoptionCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#adoptionCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+
+        <!-- 指示器 -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#adoptionCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#adoptionCarousel" data-bs-slide-to="1"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- s09 預約資訊 -->
+  <!--*************** s09 地址和基本資料詢問 ***********************-->
+  <section id="s09">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14560.308352458655!2d120.6091776!3d24.1690291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693e048d342aa9%3A0x2b6f18a6783fa3b!2z5Yue5YuV6YOo5Yue5YuV5Yqb55m85bGV572y5Lit5b2w5oqV5YiG572y77yI6Ie65Lit6IG36KiT5bGA77yJ!5e0!3m2!1szh-TW!2stw!4v1763608033325!5m2!1szh-TW!2stw"
+            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="" class="form-label fw-bold">飼主姓名</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label fw-bold">毛孩數量</label>
+            <input type="number" class="form-control">
+          </div>
+          <div class="mb-3">
+            <select name="" id="" class="form-select form-select-lg">
+              <option value="" disabled selected>---服務項目---</option>
+              <option value="">基礎洗護</option>
+              <option value="">SPA 舒壓</option>
+              <option value="">造型美容</option>
+              <option value="">客製化照護</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <select name="" id="s09-city" class="form-select form-select-lg">
+              <option value="" disabled selected>---所在地區---</option>
+              <option value="">台中市</option>
+              <option value="">新北市</option>
+              <option value="">台南市</option>
+            </select>
+          </div>
+          <div class="my-4  text-center">
+            <button class="btn btn-secondary">取消</button>
+            <button class="btn btn-primary">確認送出</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--*************** s10 寵物店徵才公告 ***********************-->
+  <section id="s10">
+    <div class="row ">
+      <!-- 職位一: 寵物美容師 -->
+      <div class="col-md-6 bg-cover" style="background-image: url(image/petshop.avif); height: 360px;">
+        <div class="row ">
+          <div class="col-md-7 s10-text ms-4 mt-5">
+            <small class="text-bg-danger badge">加入我們</small>
+            <div class="h3">誠徵專業寵物美容師 (兩名)</div>
+            <p class="fw-bold">薪資待遇: 月薪 NT$35,000 - $50,000 (依經驗面議)</p>
+            <p class="fw-bold">工作內容:
+              負責寵物洗澡、造型修剪、基礎健康檢查與環境清潔，具備耐心與愛心，能獨立作業，為毛孩打造時尚新造型。
+            </p>
+            <a href="#" class="btn btn-outline-danger">立即應徵</a>
+          </div>
+        </div>
+      </div>
+      <!-- 職位二: 寵物店門市人員 -->
+      <div class="col-md-6 bg-cover pe-4" style="background-image: url(image/petshop.avif); height: 360px;">
+        <div class="row justify-content-end">
+          <div class="col-md-7 s10-text ms-4 mt-5">
+            <small class="text-bg-success badge">加入我們</small>
+            <div class="h3">誠徵熱情門市服務人員 (兩名)</div>
+            <p class="fw-bold">薪資待遇: 月薪 NT$30,000 - $38,000</p>
+            <p class="fw-bold">工作內容:
+              接待顧客、商品銷售解說、庫存管理、環境維護。喜愛動物、樂於溝通，提供優質的顧客服務與照顧毛孩。
+            </p>
+            <a href="#" class="btn btn-outline-success">立即應徵</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- 職位三: 寵物美容助理 -->
+      <div class="col-md-6 bg-cover" style="background-image: url(image/petshop.avif); height: 360px;">
+        <div class="row">
+          <div class="col-md-7 s10-text ms-4 mt-5">
+            <small class="text-bg-danger badge">加入我們</small>
+            <div class="h3">誠徵寵物美容助理 (數名)</div>
+            <p class="fw-bold">薪資待遇: 月薪 NT$28,000 起 (可培訓)</p>
+            <p class="fw-bold">工作內容:
+              協助美容師進行寵物清潔與保養、吹毛、基礎剪指甲。無經驗可，但需對寵物美容有高度熱忱與學習意願。
+            </p>
+            <a href="#" class="btn btn-outline-danger">立即應徵</a>
+          </div>
+        </div>
+      </div>
+      <!-- 職位四: 假日兼職人員 -->
+      <div class="col-md-6 bg-cover" style="background-image: url(image/petshop.avif); height: 360px;">
+        <div class="row justify-content-end">
+          <div class="col-md-7 s10-text ms-4 mt-5">
+            <small class="text-bg-success badge">加入我們</small>
+            <div class="h3">誠徵假日兼職門市人員 (數名)</div>
+            <p class="fw-bold">薪資待遇: 時薪 NT$185 - $200</p>
+            <p class="fw-bold">工作內容:
+              週末及國定假日協助門市營運、顧客接待、商品補貨上架。適合學生或兼職者，需穩定配合排班。
+            </p>
+            <a href="#" class="btn btn-outline-success">立即應徵</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- s13 寵物購買 -->
+  <section class="bg-dark">
+    <div class="container py-5">
+      <div class="d-flex justify-content-between align-items-end">
+        <div>
+          <div class="text-uppercase small text-warning">Featured Pets</div>
+          <div class="fw-900 product-section-title h3 text-white">熱門寵物專區</div>
+        </div>
+        <a href="#" class="text-decoration-none text-secondary small">
+          查看更多寵物<i class="fa-solid fa-arrow-right-long ms-2"></i>
+        </a>
+      </div>
+
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+        <div class="carousel-inner">
+          <!-- 第一頁 -->
+          <div class="carousel-item active">
+            <div class="row g-3">
+              <div class="col-sm-6 col-md-3">
+                <div class="product-card">
+                  <img src="image/dog.avif" alt="邊牧犬">
+                </div>
+                <div class="small text-white text-truncate fw-900">邊牧犬</div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-warning fw-900"><i class="fa-solid fa-paw me-1"></i>2 個月</span>
+                  <span class="text-warning fw-900">NT$ 22,000</span>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <div class="product-card">
+                  <img src="image/dog2.avif" alt="米克斯">
+                </div>
+                <div class="small text-white text-truncate fw-900">米克斯</div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-warning fw-900"><i class="fa-solid fa-paw me-1"></i>3 個月</span>
+                  <span class="text-warning fw-900">NT$ 28,000</span>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <div class="product-card">
+                  <img src="image/rabbit.avif" alt="迷你兔">
+                </div>
+                <div class="small text-white text-truncate fw-900">迷你兔</div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-warning fw-900"><i class="fa-solid fa-paw me-1"></i>1 個月</span>
+                  <span class="text-warning fw-900">NT$ 3,500</span>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <div class="product-card">
+                  <img src="image/rat.avif" alt="寵物鼠">
+                </div>
+                <div class="small text-white text-truncate fw-900">花枝寵物鼠</div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-warning fw-900"><i class="fa-solid fa-paw me-1"></i>2 個月</span>
+                  <span class="text-warning fw-900">NT$ 1,200</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 第二頁 -->
+          <div class="carousel-item">
+            <div class="row g-3">
+              <div class="col-sm-6 col-md-3">
+                <div class="product-card">
+                  <img src="image/cat01.avif" alt="英短藍貓">
+                </div>
+                <div class="small text-white text-truncate fw-900">英短藍貓</div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-warning fw-900"><i class="fa-solid fa-paw me-1"></i>2 個月</span>
+                  <span class="text-warning fw-900">NT$ 18,000</span>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <div class="product-card">
+                  <img src="image/cat02.avif" alt="虎斑貓">
+                </div>
+                <div class="small text-white text-truncate fw-900">虎斑貓</div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-warning fw-900"><i class="fa-solid fa-paw me-1"></i>1.5 個月</span>
+                  <span class="text-warning fw-900">NT$ 16,500</span>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <div class="product-card">
+                  <img src="image/cat03.avif" alt="橘貓">
+                </div>
+                <div class="small text-white text-truncate fw-900">橘貓</div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-warning fw-900"><i class="fa-solid fa-paw me-1"></i>3 個月</span>
+                  <span class="text-warning fw-900">NT$ 30,000</span>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <div class="product-card">
+                  <img src="image/cat04.avif" alt="橘貓">
+                </div>
+                <div class="small text-white text-truncate fw-900">橘貓（家貓）</div>
+                <div class="d-flex justify-content-between">
+                  <span class="text-warning fw-900"><i class="fa-solid fa-paw me-1"></i>2 個月</span>
+                  <span class="text-warning fw-900">NT$ 6,500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 控制按鈕 -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!--*************** s11 友站連結 ***********************-->
+  <section id="s11">
+    <div class="container">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link disabled fw-900">@PowerBy XX 2025.11</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">友站01</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">友站02</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">友站03</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+<script src="js/jquery-3.7.1.js"></script> <!-- 如果其他插件需要 jQuery 才保留 -->
+<script src="js/bootstrap.bundle.min.js"></script> <!-- 或 CDN 版本，只要選一個 -->
+<script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/wow.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+<script>
+  // wowjs 初始化
+  new WOW().init();
+
+
+  //********************* s04 counterup 2*********************
+  const counterUp = window.counterUp.default
+  const callback = entries => {
+    entries.forEach(entry => {
+      const el = entry.target
+      if (entry.isIntersecting && !el.classList.contains('is-visible')) {
+        counterUp(el, {
+          duration: 2000,
+          delay: 16,
+        })
+        el.classList.add('is-visible')
+      }
+    })
+  }
+  const IO = new IntersectionObserver(callback, { threshold: 1 })
+
+  const el01 = document.querySelector('.counter01')
+  IO.observe(el01)
+  const el02 = document.querySelector('.counter02')
+  IO.observe(el02)
+  const el03 = document.querySelector('.counter03')
+  IO.observe(el03)
+  const el04 = document.querySelector('.counter04')
+  IO.observe(el04)
+
+
+
+
+  $(function () {
+    let flag_r_username = false;
+    let flag_r_password = false;
+    let flag_r_retype_password = false;
+    let timer = null;
+
+    let flag_l_username = false;
+    let flag_l_password = false;
+    //*************s09 縣市資料*************
+    //載入縣市資料
+    $.ajax({
+      type: "GET",
+      url: "js/json/CityCountyData.json",
+      dataType: "json",
+      success: showdata,
+      error: function () {
+        Swal.fire({
+          title: "連線錯誤!",
+          text: "js/json/CityCountyData.json",
+          icon: "error"
+        });
+      }
+    });
+
+    //檢查toekn是否存在和合法
+    checkLoginStatus();
+
+
+    //即時監聽 #r-username
+    $("#r-username").on("input", function () {
+      //防止多次連續觸發
+      clearTimeout(timer);
+
+      timer = setTimeout(() => {
+        if ($(this).val().length > 0 && $(this).val().length < 9) {
+          let username = $(this).val();
+
+          //傳遞至後端驗證帳號是否已存在
+          axios.post('http://127.0.0.1:5000/api/checkuni', {
+            username: username
+          })
+            .then(function (response) {
+              console.log(response);
+              if (response.data.status) {
+                $("#r-username").removeClass("is-invalid");
+                $("#r-username").addClass("is-valid");
+                $("#r-username-valid-feedback").text(response.data.message);
+                flag_r_username = true;
+              } else {
+                $("#r-username").removeClass("is-valid");
+                $("#r-username").addClass("is-invalid");
+                $("#r-username-invalid-feedback").text(response.data.message);
+                flag_r_username = false;
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            })
+            .finally(function () {
+              // always executed
+            });
+        } else {
+          $(this).removeClass("is-valid");
+          $(this).addClass("is-invalid");
+          $("#r-username-invalid-feedback").text("帳號不符合規定!");
+          flag_r_username = false;
+        }
+      }, 500);
+    });
+
+    //即時監聽 #r-password
+    $("#r-password").on("input", function () {
+      //確認密碼顯示不符合規定
+      $("#r-retype-password").removeClass("is-valid");
+      $("#r-retype-password").addClass("is-invalid");
+      flag_r_retype_password = false;
+
+      if ($(this).val().length > 0 && $(this).val().length < 9) {
+        $(this).removeClass("is-invalid");
+        $(this).addClass("is-valid");
+        flag_r_password = true;
+      } else {
+        $(this).removeClass("is-valid");
+        $(this).addClass("is-invalid");
+        flag_r_password = false;
+      }
+    });
+
+    //即時監聽 #r-retype-password
+    $("#r-retype-password").on("input", function () {
+      if ($(this).val() == $("#r-password").val()) {
+        //確認密碼符合
+        $(this).removeClass("is-invalid");
+        $(this).addClass("is-valid");
+        flag_r_retype_password = true;
+      } else {
+        //確認密碼不符合
+        $(this).removeClass("is-valid");
+        $(this).addClass("is-invalid");
+        flag_r_retype_password = false;
+      }
+    });
+
+    //按鈕監聽 #r-btn-ok
+    $("#r-btn-ok").on("click", function () {
+      if (flag_r_username && flag_r_password && flag_r_retype_password) {
+        //傳遞至後端執行註冊
+        //整理傳遞給後端的json格式資料
+
+        //方法 一
+        // let jsonDATA = {};
+        // jsonDATA["username"] = $("#r-username").val();
+        // jsonDATA["password"] = $("#r-password").val();
+        // console.log(JSON.stringify(jsonDATA));
+
+        // axios.post('http://127.0.0.1:5000/api/register', JSON.stringify(jsonDATA),
+        //     {
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     })
+        //     .then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     })
+        //     .finally(function () {
+        //         // always executed
+        //     });
+
+        //方法 二
+        let jsonDATA = {
+          username: $("#r-username").val(),
+          password: $("#r-password").val()
+        }
+
+        axios.post('http://127.0.0.1:5000/api/register', jsonDATA)
+          .then(function (response) {
+            console.log(response);
+            if (response.request.status == 200) {
+              Swal.fire({
+                title: "註冊成功!",
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: "確認",
+                denyButtonText: `Don't save`,
+                icon: "success"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  //關閉modal所有的功能
+                  bootstrap.Modal.getOrCreateInstance("#registerModal").hide();
+
+                  //清空欄位 重新觸發驗證行為
+                  $("#r-username").val('').trigger('input');
+                  $("#r-password").val('').trigger('input');
+                  $("#r-retype-password").val('');
+                }
+              });
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .finally(function () {
+            // always executed
+          });
+      } else {
+        Swal.fire({
+          title: "註冊欄位錯誤!",
+          icon: "error"
+        });
+      }
+    });
+
+
+    //#l-username 監聽
+    $("#l-username").on("input", function () {
+      if ($(this).val().length > 0 && $(this).val().length < 9) {
+        $(this).removeClass("is-invalid");
+        $(this).addClass("is-valid");
+        flag_l_username = true;
+      } else {
+        $(this).removeClass("is-valid");
+        $(this).addClass("is-invalid");
+        flag_l_username = false;
+      }
+    });
+
+    //#l-password 監聽
+    $("#l-password").on("input", function () {
+      if ($(this).val().length > 0 && $(this).val().length < 9) {
+        $(this).removeClass("is-invalid");
+        $(this).addClass("is-valid");
+        flag_l_password = true;
+      } else {
+        $(this).removeClass("is-valid");
+        $(this).addClass("is-invalid");
+        flag_l_password = false;
+      }
+    });
+
+
+    //#l-btn-ok 按鈕監聽
+    $("#l-btn-ok").on("click", function () {
+      if (flag_l_username && flag_l_password) {
+        //傳遞至後端執行登入驗證
+        axios.post('http://127.0.0.1:5000/api/login', {
+          username: $("#l-username").val(),
+          password: $("#l-password").val()
+        })
+          .then(function (response) {
+            console.log(response);
+            if (response.data.status) {
+              Swal.fire({
+                title: response.data.message,
+                showDenyButton: false,
+                showCancelButton: false,
+                icon: "success",
+                confirmButtonText: "確認",
+                denyButtonText: `Don't save`
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  //登入驗證成功
+                  //loginModal 關閉
+                  bootstrap.Modal.getOrCreateInstance("#loginModal").hide();
+
+                  //顯示登入後的UI畫面
+                  setLoginUI(response.data.username);
+
+                  //將token 寫入cookie
+                  setCookie("uid", response.data.token, 7);
+
+                  //寫入localstorage
+                  localStorage.setItem("uid", response.data.token);
+
+                }
+              });
+            } else {
+              //登入驗證失敗
+              Swal.fire({
+                title: response.data.message,
+                showDenyButton: false,
+                showCancelButton: false,
+                confirmButtonText: "確認",
+                denyButtonText: `Don't save`
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  //loginModal 關閉
+                  bootstrap.Modal.getOrCreateInstance("#loginModal").hide();
+                  // $("#l-username").val('');
+                  // $("#l-password").val('');
+                }
+              });
+
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .finally(function () {
+            // always executed
+          });
+
+      } else {
+        Swal.fire({
+          title: "登入欄位錯誤!",
+          icon: "error"
+        });
+      }
+    });
+
+
+    //登出按鈕監聽
+    $("#s02-logout-btn").on("click", function () {
+      clearLoginUI();
+      //清除localstorage
+      localStorage.removeItem("uid");
+
+    });
+
+    $("#s02-control-panel-btn").on("click", function () {
+      // window.location.href = "spacontrol.html"
+      window.open("20251218-SPA-member-control-panel-api.html", "_blank");
+    });
+
+  });
+  function showdata(data) {
+    console.log(data);
+
+    $("#s09-city").empty();
+    $("#s09-city").append(`<option value="" disabled selected>---所在地區---</option>`);
+    data.forEach(function (item) {
+      console.log(item.CityName);
+
+      let strHTML = `<option value="">${item.CityName}</option>`;
+      $("#s09-city").append(strHTML);
+    });
+  }
+
+  function checkLoginStatus() {
+    let token = localStorage.getItem("uid");
+    if (!token) {
+      console.log("沒有token!");
+    }
+
+    axios.get('http://127.0.0.1:5000/api/me', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(function (response) {
+        console.log(response);
+        //token驗證成功
+        setLoginUI(response.data.username);
+
+
+
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+
+  }
+
+  function setLoginUI(username) {
+    // s02 登入與註冊按鈕消失
+    $("#s02-login-btn").addClass("d-none");
+    $("#s02-register-btn").addClass("d-none");
+
+    //顯示登入會員訊息
+    $("#s02-member-span").removeClass("d-none");
+    $("#s02-member-span").html(`會員: <span class="text-03 fw-900 h2">${username}</span>`);
+
+    //顯示登出按鈕
+    $("#s02-logout-btn").removeClass("d-none");
+    // 顯示控制台按鈕
+    $("#s02-control-panel-btn").removeClass("d-none");
+    $("#s04").removeClass("d-none");
+    $("#s05").removeClass("d-none");
+    $("#s06").removeClass("d-none");
+    $("#s07").removeClass("d-none");
+    $("#s08").removeClass("d-none");
+
+    $("#s10").removeClass("d-none");
+    $("#s09").removeClass("d-none");
+
+  }
+
+  $("#s04").addClass("d-none");
+  $("#s05").addClass("d-none")
+  $("#s06").addClass("d-none");
+  $("#s07").addClass("d-none");
+  $("#s08").addClass("d-none");
+  $("#s09").addClass("d-none");
+  $("#s10").addClass("d-none");
+
+
+
+  //w3c
+  function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  // 加入購物車功能
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      const productName = this.closest('.col-6, .col-md-3').querySelector('.product-name').textContent;
+
+      // 按鈕動畫效果
+      this.innerHTML = '<i class="fa-solid fa-check me-2"></i>已加入';
+      this.style.background = '#28a745';
+
+      setTimeout(() => {
+        this.innerHTML = '<i class="fa-solid fa-cart-shopping me-2"></i>加入購物車';
+        this.style.background = '#ffc107';
+      }, 1500);
+
+      console.log('已加入購物車:', productName);
+    });
+  });
+
+  // 自動播放控制
+  const carousel = document.querySelector('#carouselExampleControls');
+  carousel.addEventListener('mouseenter', function () {
+    bootstrap.Carousel.getInstance(this).pause();
+  });
+
+  carousel.addEventListener('mouseleave', function () {
+    bootstrap.Carousel.getInstance(this).cycle();
+  });
+  // 愛心按鈕互動
+  document.querySelectorAll('.heart-button').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      this.classList.toggle('active');
+
+      if (this.classList.contains('active')) {
+        console.log('已加入最愛');
+      } else {
+        console.log('已移除最愛');
+      }
+    });
+  });
+
+  // 認養按鈕互動
+  document.querySelectorAll('.adopt-button').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const petName = this.closest('.adoption-card').querySelector('.pet-name').textContent.trim();
+
+      const originalHTML = this.innerHTML;
+      this.innerHTML = '<i class="fa-solid fa-check me-2"></i>已送出申請';
+      this.style.background = 'linear-gradient(135deg, #51cf66, #69db7c)';
+
+      setTimeout(() => {
+        this.innerHTML = originalHTML;
+        this.style.background = '';
+      }, 2000);
+
+      console.log('認養申請:', petName);
+    });
+  });
+
+  // 卡片點擊效果
+  document.querySelectorAll('.adoption-card').forEach(card => {
+    card.addEventListener('click', function (e) {
+      if (!e.target.closest('.adopt-button') && !e.target.closest('.heart-button')) {
+        const petName = this.querySelector('.pet-name').textContent.trim();
+        console.log('查看詳情:', petName);
+      }
+    });
+  });
+  // 愛心按鈕互動
+  document.querySelectorAll('.heart-button').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      this.classList.toggle('active');
+
+      if (this.classList.contains('active')) {
+        console.log('已加入最愛');
+      } else {
+        console.log('已移除最愛');
+      }
+    });
+  });
+
+  // 認養按鈕互動
+  document.querySelectorAll('.adopt-button').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const petName = this.closest('.adoption-card').querySelector('.pet-name').textContent.trim();
+
+      const originalHTML = this.innerHTML;
+      this.innerHTML = '<i class="fa-solid fa-check me-2"></i>已送出申請';
+      this.style.background = 'linear-gradient(135deg, #51cf66, #69db7c)';
+
+      setTimeout(() => {
+        this.innerHTML = originalHTML;
+        this.style.background = '';
+      }, 2000);
+
+      console.log('認養申請:', petName);
+    });
+  });
+
+  // 卡片點擊效果
+  document.querySelectorAll('.adoption-card').forEach(card => {
+    card.addEventListener('click', function (e) {
+      if (!e.target.closest('.adopt-button') && !e.target.closest('.heart-button')) {
+        const petName = this.querySelector('.pet-name').textContent.trim();
+        console.log('查看詳情:', petName);
+      }
+    });
+  });// 愛心按鈕互動
+  document.querySelectorAll('.heart-button').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      this.classList.toggle('active');
+
+      if (this.classList.contains('active')) {
+        console.log('已加入最愛');
+      } else {
+        console.log('已移除最愛');
+      }
+    });
+  });
+
+  // 認養按鈕互動
+  document.querySelectorAll('.adopt-button').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const petName = this.closest('.adoption-card').querySelector('.pet-name').textContent.trim();
+
+      const originalHTML = this.innerHTML;
+      this.innerHTML = '<i class="fa-solid fa-check me-2"></i>已送出申請';
+      this.style.background = 'linear-gradient(135deg, #51cf66, #69db7c)';
+
+      setTimeout(() => {
+        this.innerHTML = originalHTML;
+        this.style.background = '';
+      }, 2000);
+
+      console.log('認養申請:', petName);
+    });
+  });
+
+  // 卡片點擊效果
+  document.querySelectorAll('.adoption-card').forEach(card => {
+    card.addEventListener('click', function (e) {
+      if (!e.target.closest('.adopt-button') && !e.target.closest('.heart-button')) {
+        const petName = this.querySelector('.pet-name').textContent.trim();
+        console.log('查看詳情:', petName);
+      }
+    });
+  });
+
+
+  function clearLoginUI() {
+    // s02 登入與註冊按鈕顯示
+    $("#s02-login-btn").removeClass("d-none");
+    $("#s02-register-btn").removeClass("d-none");
+
+    //取消登入會員訊息
+    $("#s02-member-span").addClass("d-none");
+
+    //取消登出按鈕
+    $("#s02-logout-btn").addClass("d-none");
+    // 顯示內頁區塊
+
+  }
+</script>
+
+</body>
+
+</html>
