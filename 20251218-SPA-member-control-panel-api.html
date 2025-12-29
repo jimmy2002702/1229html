@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>控制台</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/table-rwd.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/my.css">
+</head>
+
+<body>
+    <!--****************** s02 ***************************-->
+    <section id="s02">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fa-solid fa-champagne-glasses text-danger fa-3x"></i>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="20251118-api.html"><i
+                                    class="fa-solid fa-house me-1 text-info"></i>首頁</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <span class="text-01 h3 me-2 d-none" id="s02-member-span">會員: <span
+                                class="text-03 fw-900 h2">xxx</span></span>
+                        <button class="btn btn-danger d-none me-2" id="s02-logout-btn"><i
+                                class="fa-solid fa-right-from-bracket"></i>登出</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+
+
+    <!-- xxxx專屬的報表 -->
+    <section id="x-chart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mt-3">
+                    <div class="h2">會員等級</div>
+                    <canvas id="myChart_level"></canvas>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <div class="h2">會員學歷</div>
+                    <canvas id="myChart_edu"></canvas>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <div class="h2">會員居住地</div>
+                    <canvas id="myChart_city"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- admin專屬的會員列表 -->
+    <section class="d-none" id="adminPanel">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div class="card mt-5">
+                        <div class="card-header h2 fw-9 text-bg-primary">
+                            會員列表
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-rwd">
+                                <thead>
+                                    <tr>
+                                        <th>會員編號</th>
+                                        <th>會員帳號</th>
+                                        <th>會員等級</th>
+                                        <th>註冊時間</th>
+                                        <th>封鎖</th>
+                                        <th>更新</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userstbody">
+                                    <tr>
+                                        <td data-th="編號">xx</td>
+                                        <td data-th="帳號">xx</td>
+                                        <td data-th="等級">xx</td>
+                                        <td data-th="時間">xx</td>
+                                        <td class="form-check form-switch">
+                                            <input type="checkbox" class="form-check-input" id="ban-btn">
+                                            <label for="">正常</label>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-warning">更新</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+    <script>
+        let myChart={};
+        const API_URL = "http://127.0.0.1:5000";
+        $(function () {
+            checkLoginStatus();
+            $("#userstbody").on("change", ".form-check-input", function () {
+                let ban = "0";
+                if ($(this).is(":checked")) {
+                    $(this).next().text("封鎖").addClass("text-danger");
+                    ban = "1";
+                } else {
+                    $(this).next().text("正常").removeClass("text-danger");
+                    ban = "0";
+                }
+                let jsonData = {
+                    id: $(this).data("id"),
+                    ban: ban
+                };
+                let token = localStorage.getItem("uid");
+                axios.patch('http://127.0.0.1:5000/api/admin/ban', jsonData, { headers: { Authorization: `Bearer ${token}` } })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                    .finally(function () {
+                        // always executed
+                    });
+            });
+
+            $("#s02_logout").on("click", function () {
+
+
+                localStorage.removeItem("uid");
+
+                Swal.fire({
+                    icon: "success",
+                    title: "成功登出",
+                    confirmButtonText: "確定",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "20251118-api.html";
+                    }
+                });
+
+                // localStorage.clear();
+            });
+
+
+        });
+        function checkLoginStatus() {
+            let token = localStorage.getItem("uid");
+            if (!token) {
+                Swal.fire({
+                    title: "請先登入會員",
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: "確認",
+                    denyButtonText: `Don't save`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "20251118-api.html";
+                    }
+                });
+                return;
+            }
+            // 驗證token
+            axios.get('http://127.0.0.1:5000/api/me', {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    if (response.data.status) {
+                        setControlPanel(response.data.username);
+                        if (response.data.level == 'admin') {
+                            $("#adminPanel").removeClass('d-none');
+                            loadAllUsers();
+                            drawChartLevel();
+                            drawChartEdu();
+                            drawChartCity();
+
+                        } else {
+                            $("#adminPanel").addClass("d-none");
+                        }
+                    }
+
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .finally(function () {
+                    // always executed
+                });
+
+
+
+
+        }
+        function setControlPanel(username) {
+
+            $("#s02_username").text(`歡迎${username}回來`).show();
+            $("#s02_logout").show();
+
+        }
+
+
+        function loadAllUsers() {
+            token = localStorage.getItem("uid");
+            if (!token) {
+                return;
+            }
+            axios.get(`${API_URL}/api/admin/users`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    $("#userstbody").empty();
+                    response.data.users.forEach((item) => {
+                        let strHTML = `<tr>
+                                            <td data-th="編號">${item.id}</td>
+                                            <td data-th="帳號">${item.username}</td>
+                                            <td data-th="等級">${item.level}</td>
+                                            <td data-th="時間">${item.created_at}</td>
+                                            <td data-th="封鎖">
+                                                <div class="form-check form-switch">
+                                                    <input type="checkbox" class="form-check-input" data-id="${item.id}" ${item.ban == "1" ? "checked" : ""}>
+                                                    <label for="" class="ms-5 ${item.ban == "1" ? "text-danger" : ""} ">${item.ban == "1" ? "封鎖" : "正常"}</label>
+                                                </div>
+                                            </td>
+                                            <td data-th="更新">
+                                                <button class="btn btn-warning ms-3" data-id="${item.id}" data-username="${item.username}" data-level="${item.level}" data-create="${item.created_at}">更新</button>
+                                            </td>
+                                        </tr>`;
+                        $("#userstbody").append(strHTML);
+                    });
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .finally(function () {
+                    // always executed
+                });
+        }
+
+        function drawChartLevel(){
+             token = localStorage.getItem("uid");
+            if (!token) {
+                return;
+            }
+            axios.get(`${API_URL}/api/admin/level`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    const labels = response.data.data.map(arr=>arr.level);
+                    const data = response.data.data.map(arr=>arr.count);
+                    drawChart('myChart_level',labels,data,"level統計");                  
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .finally(function () {
+                    // always executed
+                });
+        }
+
+        function drawChartEdu(){
+            token = localStorage.getItem("uid");
+            if (!token){
+                return;
+            }
+            axios.get(`${API_URL}/api/admin/edu`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    const labels = response.data.data.map(arr=>arr.edu);
+                    const data = response.data.data.map(arr=>arr.count);
+                    drawChart('myChart_edu',labels,data,"學歷統計");                  
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .finally(function () {
+                    // always executed
+                });
+        }
+        function drawChartCity(){
+            token = localStorage.getItem("uid");
+            if (!token){
+                return;
+            }
+            axios.get(`${API_URL}/api/admin/city`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    const labels = response.data.data.map(arr=>arr.city);
+                    const data = response.data.data.map(arr=>arr.count);
+                    drawChart('myChart_city',labels,data,"居住地統計");                  
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .finally(function () {
+                    // always executed
+                });
+        }
+         function drawChart(name,labels, data, title, type = "bar") {
+            const ctx = document.getElementById(name);
+            //避免記憶體爆掉
+            if (myChart[name]) {
+                myChart[name].destroy();
+            }
+
+            myChart[name] = new Chart(ctx, {
+                type: type,// bar , line,  pie
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        borderWidth: 1,
+                        backgroundColor: ['#FFB1C1', '#8E9AAF', '#CBC0AD', '#A3B18A', '#CDB4DB', '#FFD6A5']
+                    }]
+                },
+                options: {
+                    // plugins:{
+                    //     //1.變更圖例(legend)的文字顏色
+                    //     legend:{
+                    //         labels:{
+                    //             color:'#ffffff'
+                    //         }
+                    //     }
+                    // },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            //2. y軸文字顏色
+                            ticks:{
+                                color:'#95caca'
+                            }
+                        },
+                        //3.x軸文字顏色
+                        x:{
+                            ticks:{
+                                color:'#95caca'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>
